@@ -1,0 +1,72 @@
+﻿@page
+@model ProyectoG58.App.Presentacion.ListUserModel
+@{
+}
+<div class="card-header bg-danger"><h3 class="text-center font-weight-light my-4 ">Listado de Usuarios</h3></div>
+
+<div class="row mb-3">
+    <div class="card-body">
+       <div class="row mb-3">
+            <div class="col-md-10">
+                <div class="mt-4 mb-0">
+                    @using (Html.BeginForm())
+                    {
+                        <p>
+                            Buscar por Nombre: @Html.TextBox("SearchString")  
+                            <input class="btn btn-primary" type="submit" value="Buscar" />
+                            <a asp-page="./ListUser" class="btn btn-success">Listar Todo</a><br>
+                        </p>
+                    }
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mt-4 mb-0">
+                    <a asp-page="./Edit" class="btn btn-primary">Agregar Usuario</a><br>
+                </div>                
+            </div>           
+       </div>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Identificación</th>
+                    <th>Cargo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                    <!--<th>Detalle</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>-->
+                </tr>
+            </thead>
+            @foreach (var empleado in Model.empleados)
+            {
+                <tr>
+                    <td>@empleado.id</td>
+                    <td>@empleado.nombre</td>
+                    <td>@empleado.identificacion</td>
+                    <td>@empleado.cargo</td>
+                    <td>@empleado.estado</td>
+                    <td>
+                        <a asp-page="./Details" asp-route-empleadoId="@empleado.id">
+                            <button type="button" class="btn btn-primary btn-xs" aria-label="Left Align"  title="Detalle">
+                            <span class="fas fa-eye" aria-hidden="true"> </span>
+                            </button>
+                        </a>  
+                        <a asp-page="./Edit" asp-route-empleadoId="@empleado.id">
+                            <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" title="Editar">
+                                <span class="fas fa-edit" aria-hidden="true"> </span>
+                            </button>
+                        </a>
+                        <a asp-page="./Delete" asp-route-empleadoId="@empleado.id">
+                            <button type="button" class="btn btn-danger btn-xs" aria-label="Left Align" title="Eliminar">
+                                <span class="fas fa-trash-alt" aria-hidden="true"> </span>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

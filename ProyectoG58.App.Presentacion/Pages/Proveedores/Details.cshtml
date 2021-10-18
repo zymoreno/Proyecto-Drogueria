@@ -1,0 +1,63 @@
+﻿@page
+@model ProyectoG58.App.Presentacion.DetailsModelProv
+@{
+    string est= "";
+
+     @if (Model.proveedor.estado.Equals("A"))
+    {
+        est ="Activo";
+    }else{
+        est = "inactivo";
+    }
+}
+<div class="row mb-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header bg-dark"><h3 class="text-center font-weight-light my-4 text-primary">Detalle del Proveedor</h3></div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <td style="width:200px"><b>ID:</b></td>
+                                <td>@Model.proveedor.id</td>
+                            </tr>
+                            <tr>
+                                <td><b>NOMBRE:</b></td>
+                                <td>@Model.proveedor.nombre</td>
+                            </tr>
+                            <tr>
+                                <td><b>NIT:</b></td>
+                                <td>@Model.proveedor.nit</td>
+                            </tr>
+                            <tr>
+                                <td><b>DIRECCIÓN:</b></td>
+                                <td>@Model.proveedor.direccion</td>
+                            </tr>
+                            <tr>
+                                <td><b>TELÉFONO:</b></td>
+                                <td>@Model.proveedor.telefono</td>
+                            </tr>
+                            <tr>
+                                <td><b>EMAIL:</b></td>
+                                <td>@Model.proveedor.email</td>
+                            </tr>
+                            <tr>
+                                <td><b>ESTADO:</b></td>
+                                <td>@est</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        <a asp-page="./ListProv">
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align"  title="Volver">
+                                <span > Volver </span>
+                            </button>
+                        </a>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

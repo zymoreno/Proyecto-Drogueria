@@ -1,0 +1,314 @@
+﻿@page
+@model ProyectoG58.App.Presentacion.NewSaleModel
+
+
+@{  
+    
+}  
+
+<div class="card shadow-lg border-0 rounded-lg mt-5">
+    <div class="card-header"><h3 class="text-center font-weight-light my-4">Generar Factura</h3></div>
+    <div class="card-body">
+        <form method="post">
+            <div class="row mb-3">
+                <div class="col-md-2">
+                    <div class="mt-4 mb-0">
+                        <div class="d-grid"><a class="btn btn-primary " type="submit" >Grabar</a></div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="mt-4 mb-0">
+                        <div class="d-grid"><a class="btn btn-danger " asp-page="./Index">Cancelar</a></div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-2">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="inputFecha" type="date" placeholder="Ingrese la Fecha de la Venta" />
+                        <label for="inputFecha">Fecha: </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <input class="form-control" id="inputFactura" name="inputFactura" type="text" placeholder="Factura"  value="001" disabled="disabled"/>
+                        <label for="inputFactura">No. Factura</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-floating mb-3 mb-md-0">                        
+                       <select class="form-control" id="selectCliente" name="selectCliente">
+                           <option value="0"> Seleccione...</option>
+                            @foreach (var cliente in Model.clientes)
+                            {
+                                <option value="@cliente.id"> @cliente.nombre</option>
+                            }                            
+                        </select>
+                        <label for="selectCliente">Nombre Cliente:</label>
+                        
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                         <input class="form-control" name="inputIdCliente" id="inputIdCliente" 
+                        type="hidden" placeholder="Id"  />
+                        <input class="form-control" name="inputIdentificacionCliente" id="inputIdentificacionCliente" 
+                        type="text" placeholder="No Identificación"  disabled/>
+                        <label for="inputIdentificacionCliente"> No. Identificación:</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <input class="form-control" id="inputTelefonoCliente" type="text" placeholder="Telefono" disabled/>
+                        <label for="inputTelefonoCliente">Teléfono:</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="inputDireccionClinete" type="text" placeholder="Dirección" disabled/>
+                        <label for="inputDireccionClinete">Dirección:</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="inputCorreoCliente" type="email" placeholder="name@example.com" disabled/>
+                        <label for="inputCorreoCliente">Correo Eléctronico:</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Detalle de la Venta
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <select class="form-control" id="selectProducto" name="selectProducto">
+                        <option value="0"> Seleccione...</option>
+                            @foreach (var producto in Model.productos)
+                            {
+                                <option value="@producto.id"> @producto.nombre</option>
+                            }                            
+                        </select>
+                        <label for="selectProducto">Producto:</label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-floating">
+                        <input class="form-control" name="inputIdProducto" id="inputIdProducto" 
+                        type="hidden" />
+                        <input class="form-control" name="inputNombreProducto" id="inputNombreProducto" 
+                        type="hidden" />
+                        <input class="form-control" name="inputCantidadExiste" id="inputCantidadExiste" 
+                        type="hidden"  />
+                        <input class="form-control" id="inputCantidadProducto" type="text"  onkeyup="capturar()"/>
+                        <label for="inputCantidadProducto">Cantidad:</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <input class="form-control" id="inputVrUnitarioProducto" type="text" disabled />
+                        <label for="inputVrUnitarioProducto">Vr Unitario:</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <input class="form-control" id="inputVrIvaProducto" type="text" disabled />
+                        <label for="inputVrIvaProducto">Vr Iva:</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <input class="form-control" id="inputVrParcialProducto" type="text" disabled />
+                        <label for="inputVrParcialProducto">Vr Parcial:</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <div class="btn btn-success btn-block" id="btnAgregaProducto" onclick="calculaTotal()">Agregar</div>
+                    </div>
+                </div>
+            </div>            
+
+            <div class="row mb-3">
+                <div class="card-body">
+                    <table class="table table-bordered table-hover" id="tablaDetalleVenta">
+                        <thead>
+                            <tr>
+                                <th style="display: none">Id</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Vr Unitario</th>
+                                <th>Vr Iva</th>
+                                <th>Vr Parcial</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaDetalleVenta"> 
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-10"></div>
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <input class="form-control" id="inputVrTotal" type="text" disabled/>
+                        <label for="inputVrTotal">Valor Total:</label>
+                    </div>
+                </div>                
+            </div> 
+
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    
+    <script>
+        function obtenerCliente(id){
+            alert("adasd");
+        }
+
+        var id = 0;
+        $('select[name="selectCliente"]').change(function () {
+            var val = $(this).val();
+            id = $(this).val();
+            console.log(val);
+
+            $.ajax({
+                    type: "GET",
+                    url: "https://localhost:5011/clientes/"+id,
+                    crossDomain: true,
+                    dataType: 'jsonp',
+                    //data: "b="+id,
+                    dataType: "html",
+                    beforeSend: function(){
+                          //imagen de carga
+                          //$("#resultado").html("<p align='center'><img src='ajax-loader.gif' /></p>");
+                    },
+                    error: function(){
+                          alert("error petición ajax");
+                    },
+                    success: function(data){                                                    
+                          //$("#resultado").empty();
+                          //$("#resultado").append(data);
+                          console.log(data);
+
+                          var obj = $.parseJSON(data);
+                            var id = obj['id'];
+                            var identificacion = obj['identificacion'];
+                            var telefono = obj['telefono'];
+                            var direccion = obj['direccion'];
+                            var correo = obj['email'];
+                            console.log(identificacion);
+
+
+                          $("#inputIdCliente").val( id );
+                          $("#inputIdentificacionCliente").val( identificacion );
+                          $("#inputTelefonoCliente").val( telefono );
+                          $("#inputDireccionClinete").val( direccion );
+                          $("#inputCorreoCliente").val( correo );            
+                    }
+              });
+
+            //Model.obtenerCliente( (this).val() );
+            //alert("Lina Ma");
+
+             //$('#inputIdentificacionCliente').text("asd ");
+            /*$('select[name="selectCliente"]').each(function (index, value) {
+                $(value).val(val);
+            });*/
+        });
+
+        var idprod = 0;
+        $('select[name="selectProducto"]').change(function () {
+            var val = $(this).val();
+            idprod = $(this).val();
+            console.log(val);
+
+            $.ajax({
+                    type: "GET",
+                    url: "https://localhost:5011/productos/"+idprod,
+                    crossDomain: true,
+                    dataType: 'jsonp',
+                    dataType: "html",
+                    beforeSend: function(){
+                          //imagen de carga
+                          //$("#resultado").html("<p align='center'><img src='ajax-loader.gif' /></p>");
+                    },
+                    error: function(){
+                          alert("error petición ajax");
+                    },
+                    success: function(data){                                                    
+                          //$("#resultado").empty();
+                          //$("#resultado").append(data);
+                          console.log(data);
+
+                          var obj = $.parseJSON(data);
+                            var id = obj['id'];
+                            var nombre = obj['nombre'];
+                            var cantidad = obj['cantidad'];
+                            var precio = obj['precio'];
+
+                          $("#inputIdProducto").val( id );
+                          $("#inputNombreProducto").val( nombre );
+                          $("#inputCantidadExiste").val( cantidad );
+                          $("#inputVrUnitarioProducto").val( precio ); 
+                    }
+              });
+        });
+
+        function capturar(){
+            var Cantidad = document.getElementById("inputCantidadProducto").value;
+            var precio = document.getElementById("inputVrUnitarioProducto").value;
+            var cantExis = document.getElementById("inputCantidadExiste").value;
+            var valiva = (Cantidad*precio)*0.19;
+            var valparcial = (Cantidad*precio)+valiva;
+            var restantes= cantExis - Cantidad;
+            console.log(Cantidad);
+
+            if(restantes<0){
+                $("#inputVrIvaProducto").val( '' );
+                $("#inputVrParcialProducto").val( '' );
+                alert("No existe el total de productos solicitados solo hay "+cantExis+" en bodega");
+            }else{
+                $("#inputVrIvaProducto").val( valiva );
+                $("#inputVrParcialProducto").val( valparcial );
+            }
+        }
+
+        function calculaTotal(){
+            var filas=document.querySelectorAll("#tablaDetalleVenta tbody tr");
+             var total=0;
+ 
+             // recorremos cada una de las filas
+            filas.forEach(function(e) {
+        
+                // obtenemos las columnas de cada fila
+                var columnas=e.querySelectorAll("td");
+        
+                // obtenemos los valores de la cantidad y importe
+                var totalUn=parseFloat(columnas[5].textContent);
+        
+                total+=totalUn;
+            });
+
+            $("#inputVrTotal").val( total );
+        }
+
+
+        
+
+        //Model.clienteId(id);
+        //$('#inputIdentificacionCliente').text("asd ");
+    </script>
+}

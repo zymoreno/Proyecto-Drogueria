@@ -1,0 +1,44 @@
+﻿@page
+@model ProyectoG58.App.Presentacion.DetailsBodModel
+@{
+}
+
+<div class="row mb-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header bg-dark"><h3 class="text-center font-weight-light my-4 text-primary">Detalle Bodega</h3></div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <td style="width:200px"><b>ID:</b></td>
+                                <td>@Model.bodega.id</td>
+                            </tr>
+                            <tr>
+                                <td><b>NOMBRE:</b></td>
+                                <td>@Model.bodega.nombre</td>
+                            </tr>
+                            <tr>
+                                <td><b>DIRECCION:</b></td>
+                                <td>@Model.bodega.direccion</td>
+                            </tr>
+                            <tr>
+                                <td><b>TELEFONO:</b></td>
+                                <td>@Model.bodega.telefono</td>
+                            </tr>                            
+                        </table>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        <a asp-page="./Existences">
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align"  title="Volver">
+                                <span > Volver </span>
+                            </button>
+                        </a>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

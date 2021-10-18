@@ -1,0 +1,62 @@
+﻿@page
+@model ProyectoG58.App.Presentacion.DeleteBodModel
+@{
+}
+<div class="row mb-3">
+    @if(Model.Mensaje!=null){
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Model.Mensaje
+    </div>
+    }
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <form method="post">
+                        <div class="card-header bg-dark"><h3 class="text-center font-weight-light my-4 text-primary">Eliminar Bodega</h3></div>
+                        <div class="card-body">                            
+                            <table class="table table-hover">
+                                <tr>
+                                    <td style="display: none">ID:</td>
+                                    <td style="display: none"><input type="hidden" asp-for="bodega.id"  /></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:200px"><b>NOMBRE:</b></td>
+                                    <td>
+                                        <input asp-for="bodega.nombre" class="form-control" disabled>
+                                        <span class="text-danger" asp-validation-for="bodega.nombre"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>DIRECCIÓN:</b></td>
+                                    <td>
+                                        <input asp-for="bodega.direccion" class="form-control" disabled>
+                                        <span class="text-danger" asp-validation-for="bodega.direccion"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>TELÉFONO:</b></td>
+                                    <td>
+                                        <input asp-for="bodega.telefono" class="form-control" disabled>
+                                        <span class="text-danger" asp-validation-for="bodega.telefono"></span>
+                                    </td>
+                                </tr>                                
+                            </table>
+                            <div class="card-footer text-center py-3">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                <a asp-page="./Existences">
+                                    <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align"  title="Volver">
+                                        <span > Volver </span>
+                                    </button>
+                                </a>  
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

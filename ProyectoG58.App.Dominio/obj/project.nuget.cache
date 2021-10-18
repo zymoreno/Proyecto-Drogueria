@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "p7p4gOJvjdM8rBO7Nvogy18acBnTqoWBP9eaxpktqLIj6Rmk2l6teesotAHa2yAxKATtEwIKWI2oTrbMtFxb4w==",
+  "success": true,
+  "projectFilePath": "C:\\proyectos_ciclo3\\Proyecto_Drogueria\\ProyectoG58.App.Dominio\\ProyectoG58.App.Dominio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

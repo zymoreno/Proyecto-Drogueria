@@ -1,0 +1,94 @@
+﻿@page
+@model ProyectoG58.App.Presentacion.EditModel
+@{
+}
+
+
+
+<div class="row mb-3">
+    @if(Model.Mensaje!=null){
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Model.Mensaje
+    </div>
+    }
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <form method="post">
+                        @if(Model.cliente.id > 0){
+                            <div class="card-header bg-dark"><h3 class="text-center font-weight-light my-4 text-primary">Edición del Cliente</h3></div>
+                        }else{
+                            <div class="card-header bg-dark"><h3 class="text-center font-weight-light my-4 text-primary">Crear un Cliente</h3></div>
+                        }
+                        <div class="card-body">
+                            
+                            <table class="table table-hover">
+                                <tr>
+                                    <td style="display: none">ID:</td>
+                                    <td style="display: none"><input type="hidden" asp-for="cliente.id" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:200px"><b>NOMBRE:</b></td>
+                                    <td>
+                                        <input asp-for="cliente.nombre" class="form-control">
+                                        <span class="text-danger" asp-validation-for="cliente.nombre"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>IDENTIFICACIÓN:</b></td>
+                                    <td>
+                                        <input asp-for="cliente.identificacion" class="form-control">
+                                        <span class="text-danger" asp-validation-for="cliente.identificacion"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>DIRECCIÓN:</b></td>
+                                    <td>
+                                        <input asp-for="cliente.direccion" class="form-control">
+                                        <span class="text-danger" asp-validation-for="cliente.direccion"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>TELÉFONO:</b></td>
+                                    <td>
+                                        <input asp-for="cliente.telefono" class="form-control">
+                                        <span class="text-danger" asp-validation-for="cliente.telefono"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>EMAIL:</b></td>
+                                    <td>
+                                        <input asp-for="cliente.email" class="form-control" type="email">
+                                        <span class="text-danger" asp-validation-for="cliente.email"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>ESTADO:</b></td>
+                                    <td>
+                                        <select asp-for="cliente.estado" class="form-control">
+                                            <option value="A">Activo</option>
+                                            <option value="I">Inactivo</option>
+                                        </select>
+                                        <span class="text-danger" asp-validation-for="cliente.estado"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="card-footer text-center py-3">
+                                <button type="submit" class="btn btn-success">Grabar</button>
+                                <a asp-page="./ListClient">
+                                    <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align"  title="Volver">
+                                        <span > Volver </span>
+                                    </button>
+                                </a>  
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
